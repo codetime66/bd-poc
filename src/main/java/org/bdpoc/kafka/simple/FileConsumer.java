@@ -74,6 +74,7 @@ public class FileConsumer {
                             newFile=false;
                         }
                         out.write(record.value());
+                        out.write("\n");
                     }
                     if(out!=null){
                        out.close();
