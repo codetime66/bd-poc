@@ -38,7 +38,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>org.bdpoc.kafka.simple.Producer</mainClass>
+                            <mainClass>org.bdpoc.kafka.simple.FileProducer</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
