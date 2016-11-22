@@ -1,5 +1,7 @@
 package org.bdpoc.kafka.partition;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import org.apache.kafka.clients.consumer.*;
 import org.apache.kafka.common.TopicPartition;
 import org.apache.kafka.common.errors.WakeupException;
@@ -8,6 +10,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Properties;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class FileConsumer {
     private static Scanner in;
@@ -62,13 +66,28 @@ public class FileConsumer {
             });
             //Start processing messages
             try {
+                long countIt=0l;
                 while (true) {
                     ConsumerRecords<String, String> records = kafkaConsumer.poll(100);
-                    for (ConsumerRecord<String, String> record : records)
-                        System.out.println(record.value());
+                    FileWriter out=null;
+                    boolean newFile=true;                    
+                    for (ConsumerRecord<String, String> record : records){
+                        if(newFile){
+                            countIt++;                            
+                            out = new FileWriter("./out/chunk_".concat(topicName.concat("_").concat(String.valueOf(countIt)).concat(".txt")));
+                            newFile=false;
+                        }
+                        out.write(record.value());
+                        out.write("\n");                        
+                    }
+                    if(out!=null){
+                       out.close();
+                    }                    
                 }
             } catch (WakeupException ex) {
                 System.out.println("Exception caught " + ex.getMessage());
+            } catch (IOException ioex) {
+                Logger.getLogger(org.bdpoc.kafka.simple.FileConsumer.class.getName()).log(Level.SEVERE, null, ioex);
             } finally {
                 kafkaConsumer.close();
                 System.out.println("After closing KafkaConsumer");

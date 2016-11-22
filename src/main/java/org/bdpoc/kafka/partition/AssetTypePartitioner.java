@@ -12,7 +12,7 @@ public class AssetTypePartitioner implements Partitioner {
 
     //called at the start.
     public void configure(Map<String, ?> configs) {
-        System.out.println("Inside CountryPartitioner.configure " + configs);
+        System.out.println("Inside AssetTypePartitioner.configure " + configs);
         assetTypeToPartitionMap = new HashMap<String, Integer>();
         for(Map.Entry<String,?> entry: configs.entrySet()){
             if(entry.getKey().startsWith("partitions.")){
@@ -30,12 +30,12 @@ public class AssetTypePartitioner implements Partitioner {
                          Cluster cluster) {
         List partitions = cluster.availablePartitionsForTopic(topic);
         String valueStr = (String)value;
-        String countryName = ((String) value).split(":")[0];
-        if(assetTypeToPartitionMap.containsKey(countryName)){
-            //If the country is mapped to particular partition return it
-            return assetTypeToPartitionMap.get(countryName);
+        String assetTypeName = ((String) value).split(":")[0];
+        if(assetTypeToPartitionMap.containsKey(assetTypeName)){
+            //If the assetType is mapped to particular partition return it
+            return assetTypeToPartitionMap.get(assetTypeName);
         }else {
-            //If no country is mapped to particular partition distribute between remaining partitions
+            //If no assetType is mapped to particular partition distribute between remaining partitions
             int noOfPartitions = cluster.topics().size();
             return  value.hashCode()%noOfPartitions + assetTypeToPartitionMap.size() ;
         }
