@@ -30,4 +30,14 @@ big data poc
 
 11) Type exit in the consumer and producer consoles to close them.
 
+# a different test: usage of partitions and queuing the message processing 
 
+# create a new topic, with 3 partitions:
+       bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 3 --topic part-demo
+
+# Start three consumers using the same group ID that listen for messages published to the topic:
+
+       java -cp target/KafkaPOC-1.0-SNAPSHOT-jar-with-dependencies.jar org.bdpoc.kafka.partition.FileConsumer part-demo group1
+
+# use de producer to send a file (several times):
+       java -cp target/KafkaPOC-1.0-SNAPSHOT-jar-with-dependencies.jar org.bdpoc.kafka.partition.FileProducer part-demo in/test3.txt 
