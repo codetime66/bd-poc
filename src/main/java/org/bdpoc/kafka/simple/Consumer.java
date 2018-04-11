@@ -10,6 +10,9 @@ import java.util.Arrays;
 import java.util.Properties;
 import java.util.Scanner;
 
+/**
+* a simple implementation
+*/
 public class Consumer {
     private static Scanner in;
 
@@ -43,6 +46,7 @@ public class Consumer {
             this.topicName = topicName;
             this.groupId = groupId;
         }
+
         public void run() {
             Properties configProperties = new Properties();
             configProperties.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
@@ -68,6 +72,7 @@ public class Consumer {
                 System.out.println("After closing KafkaConsumer");
             }
         }
+
         public KafkaConsumer<String,String> getKafkaConsumer(){
            return this.kafkaConsumer;
         }
