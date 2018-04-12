@@ -6,6 +6,9 @@ import org.apache.kafka.common.errors.WakeupException;
 
 import java.util.*;
 
+/**
+* offset consumer sample
+*/
 public class Consumer {
     private static Scanner in;
 
