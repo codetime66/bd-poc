@@ -10,6 +10,9 @@ import java.util.Collection;
 import java.util.Properties;
 import java.util.Scanner;
 
+/**
+* partition consumer sample
+*/
 public class Consumer {
     private static Scanner in;
     private static boolean stop = false;
