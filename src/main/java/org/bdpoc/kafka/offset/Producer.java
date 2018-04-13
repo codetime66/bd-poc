@@ -5,6 +5,9 @@ import org.apache.kafka.clients.producer.*;
 import java.util.Properties;
 import java.util.Scanner;
 
+/**
+* offset producer sample
+*/
 public class Producer {
     private static Scanner in;
     public static void main(String[] argv)throws Exception {
