@@ -7,6 +7,9 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import java.util.Properties;
 import java.util.Scanner;
 
+/**
+* a simple sample of Producer
+*/
 public class Producer {
     private static Scanner in;
     public static void main(String[] argv)throws Exception {
